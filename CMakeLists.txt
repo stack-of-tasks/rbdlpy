@@ -62,6 +62,14 @@ ADD_LIBRARY(body SHARED unittest/body.cpp)
 PKG_CONFIG_USE_DEPENDENCY(body eigenpy)
 PKG_CONFIG_USE_DEPENDENCY(body rbdl)
 
+ADD_LIBRARY(joint SHARED unittest/joint.cpp)
+PKG_CONFIG_USE_DEPENDENCY(joint eigenpy)
+PKG_CONFIG_USE_DEPENDENCY(joint rbdl)
+
+ADD_LIBRARY(model SHARED unittest/model.cpp)
+PKG_CONFIG_USE_DEPENDENCY(model eigenpy)
+PKG_CONFIG_USE_DEPENDENCY(model rbdl)
+
 SETUP_PROJECT_FINALIZE()
 SETUP_PROJECT_CPACK()
 
