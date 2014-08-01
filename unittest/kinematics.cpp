@@ -41,6 +41,7 @@ RigidBodyDynamics::Math::VectorNd InverseKinematics(RigidBodyDynamics::Model mod
 	if(soln_found)
 	{
 		cout<<"Solution found"<<endl;
+		cout << Qres.transpose() << endl;
 		return Qres;
 	}
 	else

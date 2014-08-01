@@ -74,6 +74,10 @@ ADD_LIBRARY(kinematics SHARED unittest/kinematics.cpp)
 PKG_CONFIG_USE_DEPENDENCY(kinematics eigenpy)
 PKG_CONFIG_USE_DEPENDENCY(kinematics rbdl)
 
+ADD_LIBRARY(dynamics SHARED unittest/dynamics.cpp)
+PKG_CONFIG_USE_DEPENDENCY(dynamics eigenpy)
+PKG_CONFIG_USE_DEPENDENCY(dynamics rbdl)
+
 SETUP_PROJECT_FINALIZE()
 SETUP_PROJECT_CPACK()
 

@@ -6,10 +6,10 @@ import numpy as np
 import libmodel as md
 import libjoint as jt
 import libbody as bd
-import libkinematics as km
+import libdynamics as dm
 import libeigenpy as eigenpy
 
-# This example has been inspired from example named "pendulum" in rbdl.
+# This example has been inspired from example named "simple" in rbdl.
 
 m = md.Model()
 
@@ -68,45 +68,29 @@ body3_id = m.AddBody(body2_id, st, joint3, body3, "Link3")
 print 'Body with Id', body3_id, 'added to the body with Id', body2_id
 
 dof = m.dof_count	# DoF of the model
-print 'DoF of the system is', dof
 Q = np.zeros(dof)	# Zero vector for joint position
 QDot = np.zeros(dof)	# Zero vector for joint velocity
 QDDot = np.zeros(dof)	# Zero vector for joint acceleration
+Tau = np.zeros(dof)	# Zero vector for joint Torques
+
+# std::vector of spatial_vector type. Contains external forces acting on the system, if any.
+fext = np.array([0., 0., 0., 0., 0., 0.])
+f_ext = dm.pyvec_sv()
+f_ext.append(fext)
+
+# Wrapper function for ForwardDynamics. It returns the vector QDDot instead of taking it as a reference argument. Please note that the function signature has been modified. However, function name remains the same. Check RBDL documentation.
+QDDot = dm.ForwardDynamics(m, Q, QDot, Tau, f_ext)
+print QDDot
 '''
-km.UpdateKinematics(m, Q, QDot, QDDot)
-#km.UpdateKinematicsCustom(m, Q, QDot, QDDot)	# Does not work, not so important to expose anyways!!
-print km.CalcBodyToBaseCoordinates(m, Q, 1, np.array([0.5, 0., 0.]), True)
-print km.CalcBaseToBodyCoordinates(m, Q, 1, np.array([0.5, 0., 0.]), True)
-print km.CalcBodyWorldOrientation (m, Q, 1, True)
+# LinearSolver enum has been exposed. We can choose any LinearSolver as we want.
+linsolver = dm.LinearSolver.LinearSolverColPivHouseholderQR
+
+# Wrapper function for ForwardDynamicsLagrangian. It returns the vector QDDot instead of taking it as an reference argument. Please note that the function signature has been modified. However, function name remains the same. Check RBDL documentation.
+print dm.ForwardDynamicsLagrangian(m, Q, QDot, Tau, linsolver, f_ext)	# Some numerical problem! Report to Eigenpy.
 '''
-# Wrapper function for CalcPointJacobian. It returns the matrix G instead of taking it as an reference argument. Please note that the function signature has been modified. However, function name remains the same. Check RBDL documentation.
-print km.CalcPointJacobian(m, Q, 1, np.array([0.5, 0.5, 0.5]), True)
-print km.CalcBodyToBaseCoordinates(m, Q, 1, np.array([0.5, 0.5, 0.5]), True)
-'''
-point_position = np.array([0.5, 0., 0.])
-print km.CalcPointVelocity(m, Q, QDot, 1, point_position, True) 
-print km.CalcPointAcceleration(m, Q, QDot, QDDot, 1, point_position, True)
-'''
-Qinit = Q
-print 'Qinit vector:', Qinit
-body_id = md.pyvec_uint()	# defining a std::vector<unsigned int>
-body_id.append(3)	# Add a body_id in the vector for which we want to solve the inverse kinematics(we can add more for a tree type system)
+# Wrapper function for InverseDynamics. It returns the vector Tau instead of taking it as a reference argument. Please note that the function signature has been modified. However, function name remains the same. Check RBDL documentation.
+print dm.InverseDynamics (m, Q, QDot, QDDot, f_ext)
 
-body_point = md.pyvec_vec3d()	# defining a std::vector<Math::Vector3d>
-v3d = np.array([0., 1., 0.])	# Add a body_point(or current end effector pos) in local body coordinates in the vector for solving the inverse kinematics(we can add more for a tree type system)
-body_point.append(v3d)
-
-target_pos = md.pyvec_vec3d()	# defining a std::vector<Math::Vector3d>
-v3d = np.array([1., 0., 0.])	# Add a body_point(or target end effector pos) in local body coordinates in the vector for solving the inverse kinematics(we can add more for a tree type system)
-target_pos.append(v3d)
-
-Qres = np.zeros(dof)	# Output joint position vector
-
-step_tol = 1.0e-12
-lamda = 0.01
-max_iter = 50
-# Wrapper function for InverseKinematics. It returns the matrix Qres instead of taking it as an reference argument. Please note that the function signature has been modified. However, function name remains the same. Check RBDL documentation.
-Qres = km.InverseKinematics(m, Qinit, body_id, body_point, target_pos, step_tol, lamda, max_iter) 
-print Qres
-
-#print km.foo(2,5)
+# Wrapper function for CompositeRigidBodyAlgorithm. It returns the matrix H instead of taking it as a reference argument. Please note that the function signature has been modified. However, function name remains the same. Check RBDL documentation.
+update_kinematics = True
+print dm.CompositeRigidBodyAlgorithm (m, Q, update_kinematics)
