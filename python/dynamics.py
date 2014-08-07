@@ -1,6 +1,7 @@
 import sys
-sys.path.append('/home/skumar/src/rbdlpy/build')
-sys.path.append('/home/skumar/src/eigenpy/build')
+sys.path.append('/local/skumar/software/rbdlpy/build')
+sys.path.append('/local/skumar/devel/lib')
+
 
 import numpy as np
 import libmodel as md

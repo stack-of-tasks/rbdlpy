@@ -1,6 +1,6 @@
 import sys
-sys.path.append('/home/skumar/src/rbdlpy/build')
-sys.path.append('/home/skumar/src/eigenpy/build')
+sys.path.append('/local/skumar/software/rbdlpy/build')
+sys.path.append('/local/skumar/devel/lib')
 
 import numpy as np
 import libmodel as md
@@ -67,7 +67,7 @@ dt = 0.1;		# Time step 0.1 s
 t = 0.0;
 Ts = 10.0;		# Total simulation time(Ts)
 
-f = open('/home/skumar/src/rbdlpy/python/test.csv', 'w')
+f = open('/local/skumar/software/rbdlpy/python/test.csv', 'w')
 fw = csv.writer(f, delimiter=',')
 
 while t<=Ts:

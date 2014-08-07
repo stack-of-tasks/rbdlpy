@@ -26,6 +26,11 @@ SETUP_PROJECT()
 # ----------------------------------------------------
 ADD_REQUIRED_DEPENDENCY("eigenpy >= v1.0.1")
 ADD_REQUIRED_DEPENDENCY("rbdl")
+ADD_REQUIRED_DEPENDENCY("rbdl_urdfreader")
+ADD_REQUIRED_DEPENDENCY("rbdl_luamodel")
+
+MESSAGE ( ${RBDL_LIBRARY_DIRS} )
+#MESSAGE ( ${RBDL_LUAMODEL_LIBRARY_DIRS} )
 
 # ----------------------------------------------------
 # --- INCLUDE ----------------------------------------
@@ -56,27 +61,38 @@ ENDFOREACH(header)
 # ----------------------------------------------------
 ADD_LIBRARY(simple SHARED unittest/simple.cpp)
 PKG_CONFIG_USE_DEPENDENCY(simple eigenpy)
-PKG_CONFIG_USE_DEPENDENCY(simple rbdl)
+TARGET_LINK_LIBRARIES ( simple ${RBDL_LIBRARIES} )
+#PKG_CONFIG_USE_DEPENDENCY(simple rbdl)
 
 ADD_LIBRARY(body SHARED unittest/body.cpp)
 PKG_CONFIG_USE_DEPENDENCY(body eigenpy)
-PKG_CONFIG_USE_DEPENDENCY(body rbdl)
+TARGET_LINK_LIBRARIES ( body ${RBDL_LIBRARIES} )
 
 ADD_LIBRARY(joint SHARED unittest/joint.cpp)
 PKG_CONFIG_USE_DEPENDENCY(joint eigenpy)
-PKG_CONFIG_USE_DEPENDENCY(joint rbdl)
+TARGET_LINK_LIBRARIES ( joint ${RBDL_LIBRARIES} )
 
 ADD_LIBRARY(model SHARED unittest/model.cpp)
 PKG_CONFIG_USE_DEPENDENCY(model eigenpy)
-PKG_CONFIG_USE_DEPENDENCY(model rbdl)
+TARGET_LINK_LIBRARIES ( model ${RBDL_LIBRARIES} )
 
 ADD_LIBRARY(kinematics SHARED unittest/kinematics.cpp)
 PKG_CONFIG_USE_DEPENDENCY(kinematics eigenpy)
-PKG_CONFIG_USE_DEPENDENCY(kinematics rbdl)
+TARGET_LINK_LIBRARIES ( kinematics ${RBDL_LIBRARIES} )
 
 ADD_LIBRARY(dynamics SHARED unittest/dynamics.cpp)
 PKG_CONFIG_USE_DEPENDENCY(dynamics eigenpy)
-PKG_CONFIG_USE_DEPENDENCY(dynamics rbdl)
+TARGET_LINK_LIBRARIES ( dynamics ${RBDL_LIBRARIES} )
+
+ADD_LIBRARY(urdfreader SHARED unittest/urdfreader.cpp)
+PKG_CONFIG_USE_DEPENDENCY(urdfreader eigenpy)
+TARGET_LINK_LIBRARIES ( urdfreader ${RBDL_LIBRARIES} )
+TARGET_LINK_LIBRARIES ( urdfreader ${RBDL_URDFREADER_LIBRARIES} )
+
+ADD_LIBRARY(luamodel SHARED unittest/luamodel.cpp)
+PKG_CONFIG_USE_DEPENDENCY(luamodel eigenpy)
+TARGET_LINK_LIBRARIES ( luamodel ${RBDL_LIBRARIES} )
+TARGET_LINK_LIBRARIES ( luamodel ${RBDL_LUAMODEL_LIBRARIES} )
 
 SETUP_PROJECT_FINALIZE()
 SETUP_PROJECT_CPACK()
