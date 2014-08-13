@@ -26,10 +26,10 @@ SETUP_PROJECT()
 # ----------------------------------------------------
 ADD_REQUIRED_DEPENDENCY("eigenpy >= v1.0.1")
 ADD_REQUIRED_DEPENDENCY("rbdl")
-ADD_REQUIRED_DEPENDENCY("rbdl_urdfreader")
-ADD_REQUIRED_DEPENDENCY("rbdl_luamodel")
+#ADD_REQUIRED_DEPENDENCY("rbdl_urdfreader")
+#ADD_REQUIRED_DEPENDENCY("rbdl_luamodel")
 
-MESSAGE ( ${RBDL_LIBRARY_DIRS} )
+MESSAGE ( ${RBDL_LIBRARIES} )
 #MESSAGE ( ${RBDL_LUAMODEL_LIBRARY_DIRS} )
 
 # ----------------------------------------------------

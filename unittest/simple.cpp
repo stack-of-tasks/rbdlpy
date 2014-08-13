@@ -13,10 +13,32 @@
  * have received a copy of the GNU Lesser General Public License along
  * with eigenpy.  If not, see <http://www.gnu.org/licenses/>.
  */
+#define EIGEN_DONT_VECTORIZE
+#define EIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT 
 
 #include "rbdlpy/rbdlpy.hpp"
+#include <boost/python.hpp>
+
+using namespace boost::python;
+using namespace std;
+
+RigidBodyDynamics::Math::VectorNd test(RigidBodyDynamics::Math::VectorNd rand_array)
+{
+	return rand_array;
+}
+
+RigidBodyDynamics::Math::VectorNd test2()
+{
+	RigidBodyDynamics::Math::VectorNd rand_array = RigidBodyDynamics::Math::VectorNd::Zero (3);
+	rand_array[0] = 6.220225614566666666;
+	rand_array[1] = 4.7853457158; 
+	return rand_array;
+}
 
 BOOST_PYTHON_MODULE(libsimple)
 {
   eigenpy::enableEigenPy();
+  eigenpy::enableEigenPySpecific<RigidBodyDynamics::Math::VectorNd, Eigen::VectorXd>();
+  def("test",test);
+  def("test2",test2);
 }

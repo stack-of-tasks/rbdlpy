@@ -58,9 +58,14 @@ QDDot = np.zeros(dof)	# Zero vector for joint acceleration
 Tau = np.zeros(dof)	# Zero vector for joint Torques
 
 # std::vector of spatial_vector type. Contains external forces acting on the system, if any.
-fext = np.array([0., 0., 0., 0., 0., 0.])
+# NOTE: There is a root body always present in the model. So we need to enter one extra spatial vector of external force which is not taken into account for calculations but is required to use ForwardDynamics function of RBDL correctly.
+fext1 = np.array([0., 0., 0., 0., 0., 0.])
+fext2 = np.array([0., 0., 0., 0., 0., 0.])
+fext3 = np.array([0., 0., 0., 0., 0., 0.])
 f_ext = dm.pyvec_sv()
-f_ext.append(fext)
+f_ext.append(fext1)
+f_ext.append(fext2)
+f_ext.append(fext3)
 
 # Euler Integrator
 dt = 0.1;		# Time step 0.1 s
@@ -83,3 +88,4 @@ while t<=Ts:
 	data = [t, q[0], q[1]]
 	fw.writerow(data)
 f.close()
+

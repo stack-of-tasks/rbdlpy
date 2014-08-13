@@ -20,9 +20,13 @@
 #include "rbdlpy/rbdlpy.hpp"
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <iomanip> 
 using namespace boost::python;
 using namespace std;
 using namespace eigenpy;
+
+#include "boost/foreach.hpp"
+
 
 // Thin wrapper function for ForwardDynamics. It returns the matrix QDDot. Please note that the function signature has been modified. However, function name remains the same.
 RigidBodyDynamics::Math::VectorNd ForwardDynamics(RigidBodyDynamics::Model model, const RigidBodyDynamics::Math::VectorNd Q, const RigidBodyDynamics::Math::VectorNd QDot, const RigidBodyDynamics::Math::VectorNd Tau, std::vector< RigidBodyDynamics::Math::SpatialVector > f_ext)
@@ -91,6 +95,5 @@ BOOST_PYTHON_MODULE(libdynamics)
 	def("ForwardDynamicsLagrangian", ForwardDynamicsLagrangian, args("model", "Q", "Qdot", "Tau", "linear_solver", "f_ext"),"Computes forward dynamics by building and solving the full Lagrangian equation. ");
 	def("InverseDynamics", InverseDynamics, args("model", "Q", "Qdot", "Tau", "f_ext"),"Computes inverse dynamics with the Newton-Euler Algorithm. ");
 	def("CompositeRigidBodyAlgorithm", CompositeRigidBodyAlgorithm, args("model", "Q", "update_kinematics"), "Computes the joint space inertia matrix by using the Composite Rigid Body Algorithm.");
-
 }
 
