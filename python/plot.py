@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 #data = np.genfromtxt('/home/skumar/src/rbdl/examples/double-pendulum/build/output.csv', delimiter=',', skip_header=0, skip_footer=0, names=['t', 'q1', 'q2'])
 
-data = np.genfromtxt('/local/skumar/software/rbdlpy/python/test.csv', delimiter=',', skip_header=0, skip_footer=0, names=['t', 'q1', 'q2'])
+data = np.genfromtxt('/local/skumar/software/rbdlpy/unittest/test.csv', delimiter=',', skip_header=0, skip_footer=0, names=['t', 'q1', 'q2'])
 
 fig = plt.figure()
 

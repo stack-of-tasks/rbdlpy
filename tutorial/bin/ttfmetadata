@@ -1,0 +1,5 @@
+#!/local/skumar/software/rbdlpy/tutorial/bin/python
+import sys,logging
+from ttfquery import ttfmetadata
+logging.basicConfig( level = logging.INFO )
+sys.exit( ttfmetadata.main())
