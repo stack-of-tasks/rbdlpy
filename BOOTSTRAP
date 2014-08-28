@@ -1,0 +1,129 @@
+Installing lua:
+
+sudo apt-get install liblua5.1-0-dev
+
+Installing eigen3:
+
+sudo apt-get install libeigen3-dev
+
+Installing boost:
+
+sudo apt-get install libboost-all-dev
+
+Installing tinyxml:
+
+sudo apt-get install libtinyxml-dev
+
+Installing python-numpy:
+
+sudo apt-get install python-numpy
+
+Installing urdfdom_headers:
+
+cd /local/skumar/softwares/
+git clone https://github.com/ros/urdfdom_headers.git
+cd urdfdom_headers
+mkdir build
+cd build
+ccmake .
+Modify CMAKE_BUILD_TYPE as Release
+Modify CMAKE_INSTALL_PREFIX as /local/skumar/devel.
+cmake .
+make -s -j8
+make install
+
+Installing console_bridge:
+
+cd /local/skumar/softwares/
+git clone https://github.com/ros/console_bridge
+cd console_bridge
+mkdir build
+cd build
+ccmake .
+Modify CMAKE_BUILD_TYPE as Release
+Modify CMAKE_INSTALL_PREFIX as /local/skumar/devel.
+cmake .
+make -s -j8
+make install
+
+Installing urdfdom:
+
+cd /local/skumar/softwares/
+git clone https://github.com/ros/urdfdom
+cd urdfdom
+mkdir build
+cd build
+ccmake .
+Modify CMAKE_BUILD_TYPE as Release
+Modify CMAKE_INSTALL_PREFIX as /local/skumar/devel.
+cmake .
+make -s -j8
+make install
+
+Installing rbdl(Justin's Version):
+
+cd /local/skumar/softwares/
+hg clone https://bitbucket.org/JustinCarpentier/rbdl
+cd rbdl
+mkdir build
+cd build
+ccmake .
+Modify CMAKE_BUILD_TYPE as Release
+Modify CMAKE_INSTALL_PREFIX as /local/skumar/devel.
+cmake .
+make -s -j8
+make install
+
+NOTE: He did sudo LD_CONFIG to solve the error while building.
+
+Installing eigenpy(v1):
+
+git clone --recursive -b v1 https://github.com/stack-of-tasks/eigenpy.git
+cd eigenpy
+mkdir build
+cd build
+ccmake .
+Modify CMAKE_BUILD_TYPE as Release
+Modify CMAKE_INSTALL_PREFIX as /local/skumar/devel.
+cmake .
+make -s -j8
+make install
+
+Installing rbdlpy:
+
+1. First clone the git repository of NMansard:
+git clone https://github.com/stack-of-tasks/rbdlpy.git
+
+2. Copy paste the contents of .git/config file(in the rbdlpy folder of skumar@kitasan) in the new downloaded version of rbdlpy. Delete the previously existing content of the file.
+
+3. Check for the branches: git branch -a
+
+4. git pull nmansard
+
+5. Again check for branches using command of step 3. Now we should see new branch called "topic/skumar".
+
+6. git checkout -b topic/skumar
+
+7. git branch
+
+8. git status
+
+9. git pull
+
+10. Do the cmake and try building the project. It will show the error because rbdl_luamodel.pc and rbdl_urdfreader.pc files are missing.
+
+11. Download these files from the email(sent to Justin once). And put them in /local/skumar/devel/lib/pkgconfig/.
+
+12. Do the cmake again. If it again fails due to cyclic dependency problem, try the step below:
+
+Go to /local/skumar/devel/lib/pkgconfig, and edit the file rbdl.pc by adding lrbdl_urdfreader and lrbdl_luamodel. Build rbdl again and then rbdlpy consequently.
+
+Now everything should work!!
+
+Installing meshup tool:
+
+
+Installing cvxopt:
+
+pip install cvxopt --user
+

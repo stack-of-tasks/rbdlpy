@@ -132,20 +132,6 @@ struct FixedBody_visitor : boost::python::def_visitor<FixedBody_visitor>
 */
 };
 
-
-/*
-class Foo
-{
-private:
-    int _bar;
-public:
-    Foo& operator=( const Foo& other )
-    {
-        _bar = other._bar;
-        return *this;
-    }
-};
-*/
 BOOST_PYTHON_MODULE(libbody)
 {
   eigenpy::enableEigenPy();

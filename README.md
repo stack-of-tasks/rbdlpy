@@ -1,4 +1,4 @@
-eigenpy
+rbdlpy
 ===========
 
 Setup
@@ -29,3 +29,15 @@ have to be available on your machine.
    - usual compilation tools (GCC/G++, make, etc.)
  - Python 2.7
  - Boost python
+
+### Unit tests
+
+In the /unittest folder, one can find unit tests for each module of RBDL. For example, kinematics.py demonstrates the functionality of Kinematics module of RBDL using Python. 
+
+### Tutorials
+
+In the /python folder, there are certain tutorials to demonstrate the ability of RBDLPY. For example, FDTest.py demonstrate how to simulate the forward dynamics of a double pendulum system defined using Python. The tutorials are self explanatory and commented properly. 
+
+
+
+

@@ -113,7 +113,8 @@ SETUP_PROJECT_CPACK()
 
 ENABLE_TESTING()
 
-ADD_TEST(BodyTest ${PYTHON_EXECUTABLE} "/local/skumar/software/rbdlpy/unittest/body.py")
+SET(PYTHON_EXECUTABLE /usr/bin/python)
+ADD_TEST(BodyTest ${PYTHON_EXECUTABLE} " /local/skumar/software/rbdlpy/unittest/body.py")
 ADD_TEST(JointTest ${PYTHON_EXECUTABLE} "/local/skumar/software/rbdlpy/unittest/joint.py")
 ADD_TEST(ModelTest ${PYTHON_EXECUTABLE} "/local/skumar/software/rbdlpy/unittest/model.py")
 ADD_TEST(KinematicsTest ${PYTHON_EXECUTABLE} "/local/skumar/software/rbdlpy/unittest/kinematics.py")

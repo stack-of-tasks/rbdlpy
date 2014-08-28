@@ -66,4 +66,4 @@ print fb.spatialInertia
 assert(fb.MovableParent==0)
 print fb.ParentTransform
 print fb.BaseTransform
-p = fb.CreateFromBody(bd.Body())	# Problem here
+#p = fb.CreateFromBody(bd.Body())	# Problem here
